@@ -211,6 +211,18 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .sm-total .lbl{font-size:clamp(15px,1.8vw,20px);font-weight:600}
 .sm-total .val{font-size:clamp(30px,5.4vw,62px);font-weight:600;letter-spacing:-.035em;line-height:1}
 
+.sm-tabs{display:flex;gap:10px;margin:clamp(18px,2.4vw,28px) 0 clamp(6px,1vw,10px)}
+.sm-tab{flex:1;text-align:left;cursor:pointer;border:1px solid var(--line);border-radius:3px;
+  background:var(--paper);color:var(--ink-2);padding:14px 18px;font:inherit;
+  display:flex;flex-direction:column;gap:4px;transition:border-color .15s,color .15s}
+.sm-tab b{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.sm-tab span{font-size:clamp(17px,2vw,21px);font-weight:600;color:var(--ink);letter-spacing:-.02em}
+.sm-tab.is-active{border-color:var(--steel-d)}
+.sm-tab.is-active b{color:var(--steel-d)}
+.sm-tab:hover{border-color:var(--steel)}
+.sm-set[hidden]{display:none}
+@media(max-width:560px){.sm-tabs{flex-direction:column}}
+
 /* STATS */
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,32px);margin-top:clamp(28px,3.6vw,52px)}
 @media(max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -381,7 +393,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 </nav>
 
 <div id="mbar">
-  <a href="#smeta" class="mb-price"><b>3 891 000 ₽</b><span>без НДС · смета № 2618</span></a>
+  <a href="#smeta" class="mb-price"><b>от 2 886 000 ₽</b><span>без НДС · смета № 2618</span></a>
   <a href="tel:+79856631310" class="mb-cta">Позвонить</a>
 </div>
 
@@ -397,7 +409,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <div><div class="k">Проекция</div><div class="v">2 × 5000 лм</div></div>
       <div><div class="k">Контент</div><div class="v">3 ролика + приложение</div></div>
       <div><div class="k">Срок</div><div class="v">10 недель</div></div>
-      <div><div class="k">Бюджет</div><div class="v">3 891 000 ₽ без НДС</div></div>
+      <div><div class="k">Бюджет</div><div class="v">от 2 886 000 ₽ без НДС</div></div>
     </div>
   </div></div>
   <div class="scroll-hint">Листайте</div>
@@ -923,23 +935,93 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <div class="rv"><div class="eyebrow">06 — Смета</div></div>
       <div class="rv">
         <h2 class="h-xl">Поставка<br>интерактивного макета</h2>
-        <p class="lead" style="margin-top:22px;max-width:58ch">Смета № 2618 от 29.09.2026. Четыре блока: оборудование, конструктив, контент, работы. Цены без НДС.</p>
+        <p class="lead" style="margin-top:22px;max-width:58ch">Смета № 2618 от 29.09.2026. Два варианта комплектации — стандарт и эконом. В каждом четыре блока: оборудование, конструктив, контент, работы. Цены без НДС.</p>
       </div>
     </div>
 
-    <div class="sm rv">
+    <div class="rv">
+      <div class="sm-tabs" role="tablist">
+        <button type="button" class="sm-tab is-active" data-variant="standard" role="tab" aria-selected="true"><b>Стандарт</b><span>3 766 000 ₽</span></button>
+        <button type="button" class="sm-tab" data-variant="econom" role="tab" aria-selected="false"><b>Эконом</b><span>2 886 000 ₽</span></button>
+      </div>
+    </div>
+
+    <div class="sm rv sm-set" data-variant="standard">
 
       <div class="sm-blk">
         <div class="sm-h">
           <h3>1. Оборудование<span class="sub">Проекция, вычислительная часть, сеть, звук, коммутация</span></h3>
-          <div class="sum">1 756 000 ₽</div>
+          <div class="sum">1 811 000 ₽</div>
         </div>
         <div class="sm-rows">
-          <div class="sm-r"><span class="nm">Проектор 5000 лм + короткофокусная линза</span><span>шт</span><span>2</span><span>700 000</span><span class="qp">2 шт × 700 000</span><span>1 400 000</span></div>
-          <div class="sm-r"><span class="nm">ПК-видеосервер, профессиональная видеокарта</span><span>шт</span><span>1</span><span>220 000</span><span class="qp">1 шт × 220 000</span><span>220 000</span></div>
-          <div class="sm-r"><span class="nm">Акустическая система</span><span>комплект</span><span>1</span><span>60 000</span><span class="qp">1 комплект × 60 000</span><span>60 000</span></div>
+          <div class="sm-r"><span class="nm">Проектор 6 000–7 000 лм + короткофокусная линза</span><span>шт</span><span>2</span><span>680 000</span><span class="qp">2 шт × 680 000</span><span>1 360 000</span></div>
+          <div class="sm-r"><span class="nm">ПК-видеосервер, профессиональная видеокарта</span><span>шт</span><span>1</span><span>210 000</span><span class="qp">1 шт × 210 000</span><span>210 000</span></div>
+          <div class="sm-r"><span class="nm">Акустическая система, кронштейны, усилитель, колонки</span><span>комплект</span><span>1</span><span>120 000</span><span class="qp">1 комплект × 120 000</span><span>120 000</span></div>
           <div class="sm-r"><span class="nm">Планшет 13″ Android</span><span>шт</span><span>1</span><span>50 000</span><span class="qp">1 шт × 50 000</span><span>50 000</span></div>
-          <div class="sm-r"><span class="nm">Коммутация HDMI по оптике + силовая</span><span>комплект</span><span>1</span><span>20 000</span><span class="qp">1 комплект × 20 000</span><span>20 000</span></div>
+          <div class="sm-r"><span class="nm">Кронштейн для планшета</span><span>шт</span><span>1</span><span>35 000</span><span class="qp">1 шт × 35 000</span><span>35 000</span></div>
+          <div class="sm-r"><span class="nm">Коммутация HDMI по оптике + силовая</span><span>комплект</span><span>1</span><span>30 000</span><span class="qp">1 комплект × 30 000</span><span>30 000</span></div>
+          <div class="sm-r"><span class="nm">Wi-Fi роутер</span><span>шт</span><span>1</span><span>6 000</span><span class="qp">1 шт × 6 000</span><span>6 000</span></div>
+        </div>
+      </div>
+
+      <div class="sm-blk">
+        <div class="sm-h">
+          <h3>2. Конструктив<span class="sub">Стол-подиум и рельефный макет</span></h3>
+          <div class="sum">465 000 ₽</div>
+        </div>
+        <div class="sm-rows">
+          <div class="sm-r"><span class="nm">Макет рельефа из слоёв МДФ, крашеный</span><span>шт</span><span>1</span><span>280 000</span><span class="qp">1 шт × 280 000</span><span>280 000</span></div>
+          <div class="sm-r"><span class="nm">Тумба под макет</span><span>шт</span><span>1</span><span>185 000</span><span class="qp">1 шт × 185 000</span><span>185 000</span></div>
+        </div>
+      </div>
+
+      <div class="sm-blk">
+        <div class="sm-h">
+          <h3>3. Контент<span class="sub">Три сценария и управляющее приложение</span></h3>
+          <div class="sum">950 000 ₽</div>
+        </div>
+        <div class="sm-rows">
+          <div class="sm-r"><span class="nm">Основной ролик по карте, со звуком</span><span>шт</span><span>1</span><span>400 000</span><span class="qp">1 шт × 400 000</span><span>400 000</span></div>
+          <div class="sm-r"><span class="nm">Дополнительный сценарий, со звуком</span><span>шт</span><span>1</span><span>250 000</span><span class="qp">1 шт × 250 000</span><span>250 000</span></div>
+          <div class="sm-r"><span class="nm">Разработка управляющего приложения для планшета</span><span>проект</span><span>1</span><span>150 000</span><span class="qp">1 проект × 150 000</span><span>150 000</span></div>
+          <div class="sm-r"><span class="nm">Ролик-заставка: карты, логотипы</span><span>шт</span><span>1</span><span>150 000</span><span class="qp">1 шт × 150 000</span><span>150 000</span></div>
+        </div>
+      </div>
+
+      <div class="sm-blk">
+        <div class="sm-h">
+          <h3>4. Работы<span class="sub">Монтаж, пусконаладка, логистика, управление проектом</span></h3>
+          <div class="sum">540 000 ₽</div>
+        </div>
+        <div class="sm-rows">
+          <div class="sm-r"><span class="nm">Монтаж на площадке: конструктив, аудио-видео, коммутация</span><span>проект</span><span>1</span><span>150 000</span><span class="qp">1 проект × 150 000</span><span>150 000</span></div>
+          <div class="sm-r"><span class="nm">Настройка видеосервера, планшета, мэппинга, автоматической работы</span><span>проект</span><span>1</span><span>100 000</span><span class="qp">1 проект × 100 000</span><span>100 000</span></div>
+          <div class="sm-r"><span class="nm">Управление проектом</span><span>проект</span><span>1</span><span>100 000</span><span class="qp">1 проект × 100 000</span><span>100 000</span></div>
+          <div class="sm-r"><span class="nm">Командировочные и логистика команды на площадку</span><span>проект</span><span>1</span><span>140 000</span><span class="qp">1 проект × 140 000</span><span>140 000</span></div>
+          <div class="sm-r"><span class="nm">Логистика оборудования и конструктива</span><span>проект</span><span>1</span><span>50 000</span><span class="qp">1 проект × 50 000</span><span>50 000</span></div>
+        </div>
+      </div>
+
+      <div class="sm-total">
+        <div class="lbl">Итого без НДС</div>
+        <div class="val">3 766 000 ₽</div>
+      </div>
+    </div>
+
+    <div class="sm rv sm-set" data-variant="econom" hidden>
+
+      <div class="sm-blk">
+        <div class="sm-h">
+          <h3>1. Оборудование<span class="sub">Проекция, вычислительная часть, сеть, звук, коммутация</span></h3>
+          <div class="sum">1 211 000 ₽</div>
+        </div>
+        <div class="sm-rows">
+          <div class="sm-r"><span class="nm">Проектор 5 000 лм, ламповый</span><span>шт</span><span>2</span><span>420 000</span><span class="qp">2 шт × 420 000</span><span>840 000</span></div>
+          <div class="sm-r"><span class="nm">ПК-видеосервер, профессиональная видеокарта</span><span>шт</span><span>1</span><span>180 000</span><span class="qp">1 шт × 180 000</span><span>180 000</span></div>
+          <div class="sm-r"><span class="nm">Акустическая система, кронштейны, усилитель, колонки</span><span>комплект</span><span>1</span><span>70 000</span><span class="qp">1 комплект × 70 000</span><span>70 000</span></div>
+          <div class="sm-r"><span class="nm">Планшет 13″ Android</span><span>шт</span><span>1</span><span>50 000</span><span class="qp">1 шт × 50 000</span><span>50 000</span></div>
+          <div class="sm-r"><span class="nm">Кронштейн для планшета</span><span>шт</span><span>1</span><span>35 000</span><span class="qp">1 шт × 35 000</span><span>35 000</span></div>
+          <div class="sm-r"><span class="nm">Коммутация HDMI по оптике + силовая</span><span>комплект</span><span>1</span><span>30 000</span><span class="qp">1 комплект × 30 000</span><span>30 000</span></div>
           <div class="sm-r"><span class="nm">Wi-Fi роутер</span><span>шт</span><span>1</span><span>6 000</span><span class="qp">1 шт × 6 000</span><span>6 000</span></div>
         </div>
       </div>
@@ -958,11 +1040,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <div class="sm-blk">
         <div class="sm-h">
           <h3>3. Контент<span class="sub">Три сценария и управляющее приложение</span></h3>
-          <div class="sum">1 120 000 ₽</div>
+          <div class="sum">735 000 ₽</div>
         </div>
         <div class="sm-rows">
-          <div class="sm-r"><span class="nm">Основной ролик по карте, со звуком</span><span>шт</span><span>1</span><span>500 000</span><span class="qp">1 шт × 500 000</span><span>500 000</span></div>
-          <div class="sm-r"><span class="nm">Дополнительный сценарий, со звуком</span><span>шт</span><span>1</span><span>350 000</span><span class="qp">1 шт × 350 000</span><span>350 000</span></div>
+          <div class="sm-r"><span class="nm">Основной ролик по карте, со звуком</span><span>шт</span><span>1</span><span>315 000</span><span class="qp">1 шт × 315 000</span><span>315 000</span></div>
+          <div class="sm-r"><span class="nm">Дополнительный сценарий, со звуком</span><span>шт</span><span>1</span><span>150 000</span><span class="qp">1 шт × 150 000</span><span>150 000</span></div>
           <div class="sm-r"><span class="nm">Разработка управляющего приложения для планшета</span><span>проект</span><span>1</span><span>150 000</span><span class="qp">1 проект × 150 000</span><span>150 000</span></div>
           <div class="sm-r"><span class="nm">Ролик-заставка: карты, логотипы</span><span>шт</span><span>1</span><span>120 000</span><span class="qp">1 шт × 120 000</span><span>120 000</span></div>
         </div>
@@ -970,24 +1052,25 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
       <div class="sm-blk">
         <div class="sm-h">
-          <h3>4. Работы<span class="sub">Проектирование, монтаж, пусконаладка, логистика, управление</span></h3>
-          <div class="sum">615 000 ₽</div>
+          <h3>4. Работы<span class="sub">Монтаж, пусконаладка, логистика, управление проектом</span></h3>
+          <div class="sum">540 000 ₽</div>
         </div>
         <div class="sm-rows">
           <div class="sm-r"><span class="nm">Монтаж на площадке: конструктив, аудио-видео, коммутация</span><span>проект</span><span>1</span><span>150 000</span><span class="qp">1 проект × 150 000</span><span>150 000</span></div>
-          <div class="sm-r"><span class="nm">Настройка видеосервера, планшета, мэппинга, автоматической работы</span><span>проект</span><span>1</span><span>150 000</span><span class="qp">1 проект × 150 000</span><span>150 000</span></div>
+          <div class="sm-r"><span class="nm">Настройка видеосервера, планшета, мэппинга, автоматической работы</span><span>проект</span><span>1</span><span>100 000</span><span class="qp">1 проект × 100 000</span><span>100 000</span></div>
           <div class="sm-r"><span class="nm">Управление проектом</span><span>проект</span><span>1</span><span>100 000</span><span class="qp">1 проект × 100 000</span><span>100 000</span></div>
-          <div class="sm-r"><span class="nm">Командировочные и логистика команды на площадку</span><span>проект</span><span>1</span><span>100 000</span><span class="qp">1 проект × 100 000</span><span>100 000</span></div>
-          <div class="sm-r"><span class="nm">Проектирование и подбор оборудования</span><span>проект</span><span>1</span><span>65 000</span><span class="qp">1 проект × 65 000</span><span>65 000</span></div>
+          <div class="sm-r"><span class="nm">Командировочные и логистика команды на площадку</span><span>проект</span><span>1</span><span>140 000</span><span class="qp">1 проект × 140 000</span><span>140 000</span></div>
           <div class="sm-r"><span class="nm">Логистика оборудования и конструктива</span><span>проект</span><span>1</span><span>50 000</span><span class="qp">1 проект × 50 000</span><span>50 000</span></div>
         </div>
       </div>
 
       <div class="sm-total">
         <div class="lbl">Итого без НДС</div>
-        <div class="val">3 891 000 ₽</div>
+        <div class="val">2 886 000 ₽</div>
       </div>
+    </div>
 
+    <div class="rv">
       <p class="small" style="margin-top:18px;max-width:70ch">Предложение действует 30 календарных дней. Цены на импортное оборудование подтверждаются на дату заказа. Подготовка помещения — электропитание в точках установки, несущие конструкции под кронштейны, отдельная группа освещения над макетом — на стороне Заказчика.</p>
     </div>
   </div>
@@ -1133,6 +1216,15 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   }
   window.addEventListener('scroll', counters, {passive:true});
   counters();
+
+  var smTabs=document.querySelectorAll('.sm-tab'), smSets=document.querySelectorAll('.sm-set');
+  smTabs.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var v=btn.getAttribute('data-variant');
+      smTabs.forEach(function(b){ b.classList.toggle('is-active', b===btn); b.setAttribute('aria-selected', b===btn?'true':'false'); });
+      smSets.forEach(function(s){ s.hidden = s.getAttribute('data-variant')!==v; });
+    });
+  });
 })();
 </script>
 </body>
