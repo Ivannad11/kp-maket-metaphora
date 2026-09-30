@@ -217,32 +217,61 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   display:flex;flex-direction:column;gap:4px;transition:border-color .15s,color .15s}
 .sm-tab b{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
 .sm-tab span{font-size:clamp(17px,2vw,21px);font-weight:600;color:var(--ink);letter-spacing:-.02em}
+.sm-tab em{font-size:12px;font-style:normal;color:var(--ink-3)}
 .sm-tab.is-active{border-color:var(--steel-d)}
+.sm-tab.is-active{background:var(--paper-2)}
 .sm-tab.is-active b{color:var(--steel-d)}
 .sm-tab:hover{border-color:var(--steel)}
 .sm-set[hidden]{display:none}
 @media(max-width:560px){.sm-tabs{flex-direction:column}}
+.sm-more{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--ink);border-radius:100px;
+  padding:13px 24px;font:inherit;font-size:14px;font-weight:600;background:none;color:var(--ink);
+  cursor:pointer;margin-top:18px;transition:background .15s,color .15s}
+.sm-more .ar{font-size:13px;transition:transform .2s}
+.sm-more[aria-expanded="true"] .ar{transform:rotate(180deg)}
+.sm-more:hover{background:var(--ink);color:var(--paper)}
 
 /* STATS */
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,32px);margin-top:clamp(28px,3.6vw,52px)}
-@media(max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,32px);margin-top:clamp(28px,3.6vw,52px)}
+@media(max-width:760px){.stats{grid-template-columns:repeat(1,minmax(0,1fr))}}
 .stat .v{font-size:clamp(26px,3.6vw,46px);font-weight:600;letter-spacing:-.035em;line-height:1;color:var(--steel-d)}
 .stat .k{font-size:12px;color:var(--ink-3);margin-top:7px;line-height:1.4}
 .dark .stat .v{color:var(--steel-l)}
 
-/* STEPS */
+/* STEPS — раскрывающийся список */
 .steps{display:grid;gap:0}
-.steps>div{display:grid;grid-template-columns:44px minmax(0,1fr) 160px;gap:20px;padding:18px 0;
-  border-bottom:1px solid var(--line-2);align-items:start}
-.dark .steps>div{border-color:rgba(255,255,255,.08)}
-.steps .st-n{font-family:var(--mono);font-size:12px;color:var(--steel);letter-spacing:.1em;padding-top:3px}
+.steps .st-d{border-bottom:1px solid var(--line-2)}
+.dark .steps .st-d{border-color:rgba(255,255,255,.08)}
+.steps summary{display:flex;align-items:center;gap:20px;padding:18px 0;cursor:pointer;list-style:none}
+.steps summary::-webkit-details-marker{display:none}
+.steps summary::marker{display:none}
+.steps .st-n{font-family:var(--mono);font-size:12px;color:var(--steel);letter-spacing:.1em;flex:0 0 auto}
 .dark .steps .st-n{color:var(--steel-l)}
-.steps b{display:block;font-size:15px;margin-bottom:3px;font-weight:600}
-.steps p{font-size:14px;line-height:1.55;color:var(--ink-2)}
+.steps summary b{font-size:15px;font-weight:600;flex:1}
+.steps .ic{flex:0 0 auto;color:var(--ink-3);font-size:22px;font-weight:300;line-height:1;transition:transform .2s}
+.dark .steps .ic{color:#7b8695}
+.steps .st-d[open] .ic{transform:rotate(45deg)}
+.steps p{font-size:14px;line-height:1.55;color:var(--ink-2);margin:0;padding:0 38px 18px 32px}
 .dark .steps p{color:#a3adbb}
-.steps .st-t{font-size:12.5px;color:var(--ink-3);padding-top:4px;text-align:right}
-@media(max-width:720px){.steps>div{grid-template-columns:44px minmax(0,1fr);gap:14px}
-  .steps .st-t{grid-column:2;padding-top:6px;text-align:left}}
+@media(max-width:480px){.steps p{padding-left:0;padding-right:0}}
+
+/* FAQ («Для старта») — раскрывающийся список */
+.faq{display:grid;gap:0;border-top:1px solid var(--line)}
+.dark .faq{border-color:rgba(255,255,255,.13)}
+.faq-d{border-bottom:1px solid var(--line-2)}
+.dark .faq-d{border-color:rgba(255,255,255,.08)}
+.faq summary{display:flex;align-items:center;gap:20px;padding:18px 0;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::marker{display:none}
+.faq .tag{flex:0 0 auto}
+.faq summary b{font-size:14.5px;font-weight:600;flex:1;color:var(--ink)}
+.dark .faq summary b{color:#fff}
+.faq .ic{flex:0 0 auto;color:var(--ink-3);font-size:22px;font-weight:300;line-height:1;transition:transform .2s}
+.dark .faq .ic{color:#7b8695}
+.faq-d[open] .ic{transform:rotate(45deg)}
+.faq p{font-size:14.5px;line-height:1.58;color:var(--ink-2);margin:0;padding:0 38px 18px 56px}
+.dark .faq p{color:#a3adbb}
+@media(max-width:480px){.faq p{padding-left:0;padding-right:0}}
 
 /* PHOTO SLOT */
 .no-vis{display:grid;place-items:center;aspect-ratio:16/9;border:1px dashed var(--line);border-radius:3px;
@@ -343,12 +372,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   .sm-total .val{font-size:34px}
 
   /* этапы */
-  .steps>div{grid-template-columns:minmax(0,1fr);gap:6px;padding:20px 0}
-  .steps .st-n{display:none}
-  .steps .st-t{order:-1;grid-column:1;padding:0 0 4px;text-align:left;font-size:11px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--steel);font-weight:600}
-  .dark .steps .st-t{color:var(--steel-l)}
-  .steps b{font-size:16px}
+  .steps summary b{font-size:16px}
 
   /* списки «тег + текст» */
   .ql>div{padding:16px 0}
@@ -381,7 +405,6 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <nav id="nav">
   <a href="https://metaphora.pro/" target="_blank" rel="noopener" class="brand"><b>МЕТАФОРА</b><em>metaphora.pro</em></a>
   <div class="nav-links">
-    <a href="#what">Состав</a>
     <a href="#geom">Геометрия</a>
     <a href="#maket">Макет</a>
     <a href="#light">Проекция</a>
@@ -393,7 +416,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 </nav>
 
 <div id="mbar">
-  <a href="#smeta" class="mb-price"><b>от 2 886 000 ₽</b><span>без НДС · смета № 2618</span></a>
+  <a href="#smeta" class="mb-price"><b>3 766 000 ₽</b><span>без НДС · смета № 2618</span></a>
   <a href="tel:+79856631310" class="mb-cta">Позвонить</a>
 </div>
 
@@ -403,53 +426,25 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   <div class="hero-in"><div class="wrap">
     <div class="eyebrow" style="color:#8b97a6">Коммерческое предложение · смета № 2618 от 29.09.2026</div>
     <h1 class="h-xxl">Интерактивный<br>макет с рельефом<br><span class="serif">и проекцией</span></h1>
-    <p class="lead">Стол 3×3 метра. Рельеф собран послойно из МДФ. Сверху — видеопроекция с двух лазерных проекторов. Управление показом с планшета. Под ключ: проектирование, производство, контент, монтаж, пусконаладка.</p>
+    <p class="lead">Стол 3×3 м, рельеф из слоёв МДФ, проекция с двух лазерных проекторов, управление с планшета. Под ключ: проектирование, производство, монтаж, пусконаладка.</p>
     <div class="hero-meta">
       <div><div class="k">Поле проекции</div><div class="v">3000 × 3000 мм</div></div>
       <div><div class="k">Проекция</div><div class="v">2 × 5000 лм</div></div>
       <div><div class="k">Контент</div><div class="v">3 ролика + приложение</div></div>
-      <div><div class="k">Срок</div><div class="v">10 недель</div></div>
-      <div><div class="k">Бюджет</div><div class="v">от 2 886 000 ₽ без НДС</div></div>
+      <div><div class="k">Бюджет</div><div class="v">3 766 000 ₽ без НДС</div></div>
     </div>
   </div></div>
   <div class="scroll-hint">Листайте</div>
 </header>
 
-<!-- ============ 01 СОСТАВ ============ -->
-<section class="sec" id="what">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="rv"><div class="eyebrow">01 — Что поставляем</div></div>
-      <div class="rv">
-        <h2 class="h-xl">Четыре части<br>одного комплекса</h2>
-        <p class="lead" style="margin-top:22px;max-width:60ch">Один подрядчик на весь объём: от цифровой модели рельефа до подписанного акта ПНР. Заказчик получает работающую систему, а не набор оборудования.</p>
-      </div>
-    </div>
-
-    <div class="grid g-4">
-      <div class="card rv"><span class="n">01</span><h3 class="h-m">Конструктив</h3><p>Стол-подиум 3×3 м высотой 700 мм и рельефный макет из слоёв МДФ, собранный девятью модулями 1000×1000 мм.</p></div>
-      <div class="card rv" style="transition-delay:.06s"><span class="n">02</span><h3 class="h-m">Проекция</h3><p>Два короткофокусных лазерных проектора на потолочных кронштейнах, медиасервер, акустика, силовая и слаботочная коммутация.</p></div>
-      <div class="card rv" style="transition-delay:.12s"><span class="n">03</span><h3 class="h-m">Контент</h3><p>Ролик-заставка, основной ролик по карте со звуком, дополнительный сценарий со звуком и управляющее приложение для планшета.</p></div>
-      <div class="card rv" style="transition-delay:.18s"><span class="n">04</span><h3 class="h-m">Ввод в работу</h3><p>Монтаж на площадке, мэппинг на рельеф, настройка автозапуска и сценариев, тесты, документация и обучение персонала.</p></div>
-    </div>
-
-    <div class="stats">
-      <div class="stat rv"><div class="v" data-count="9">0</div><div class="k">Модулей макета 1000×1000 мм</div></div>
-      <div class="stat rv"><div class="v" data-count="2">0</div><div class="k">Проектора, перекрытие без теней</div></div>
-      <div class="stat rv"><div class="v" data-count="3">0</div><div class="k">Сценария показа со звуком</div></div>
-      <div class="stat rv"><div class="v" data-count="10">0</div><div class="k">Недель от договора до сдачи</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 02 ГЕОМЕТРИЯ ============ -->
+<!-- ============ 01 ГЕОМЕТРИЯ ============ -->
 <section class="sec sec--tight" id="geom" style="background:var(--paper-2)">
   <div class="wrap">
     <div class="sec-head">
-      <div class="rv"><div class="eyebrow">02 — Геометрия</div></div>
+      <div class="rv"><div class="eyebrow">01 — Геометрия</div></div>
       <div class="rv">
         <h2 class="h-xl">Всё считается<br>от высоты потолка</h2>
-        <p class="lead" style="margin-top:22px;max-width:60ch">Потолок 3800 мм, стол 700 мм — на проекцию остаётся 3100 мм. С учётом кронштейна и сервисного зазора линза встаёт в 2400–2850 мм от поверхности макета. Чтобы с такой дистанции накрыть 3 метра, нужен коэффициент проекции 0,75–0,95 — только короткофокусная оптика.</p>
+        <p class="lead" style="margin-top:22px;max-width:60ch">Потолок 3800 мм, стол 700 мм, до макета 3100 мм. Линза в 2400–2850 мм от поверхности — нужен коэффициент проекции 0,75–0,95, только короткофокусная оптика.</p>
       </div>
     </div>
 
@@ -569,7 +564,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
         <div class="wide"><b>Коэффициент проекции 0,75–0,95</b><span>Только короткофокусная оптика</span></div>
       </div>
 
-      <p class="scheme-cap">Оба проектора светят на всё поле с разнесённых точек и совмещаются варпингом. Это даёт двойную яркость и, главное, снимает глухие тени за выступами рельефа — тень от одного засвечивается вторым.</p>
+      <p class="scheme-cap">Оба проектора светят на всё поле с разных точек и совмещаются варпингом: двойная яркость, тени от рельефа засвечиваются вторым каналом.</p>
     </div>
   </div>
 </section>
@@ -578,10 +573,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <section class="sec" id="maket">
   <div class="wrap">
     <div class="sec-head">
-      <div class="rv"><div class="eyebrow">03 — Макет</div></div>
+      <div class="rv"><div class="eyebrow">02 — Макет</div></div>
       <div class="rv">
         <h2 class="h-xl">Девять модулей,<br>послойная сборка</h2>
-        <p class="lead" style="margin-top:22px;max-width:60ch">Рельеф режется на ЧПУ по цифровой модели и собирается слоями. Модульность 1000×1000 мм — чтобы занести в помещение, собрать на месте и потом обслуживать без разборки всего поля.</p>
+        <p class="lead" style="margin-top:22px;max-width:60ch">Рельеф режется на ЧПУ по цифровой модели, собирается слоями. Модули 1000×1000 мм — для заноса, сборки на месте и обслуживания без разборки всего поля.</p>
       </div>
     </div>
 
@@ -681,30 +676,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
         <div class="wide"><b>40–70 мм</b><span>Общий перепад рельефа</span></div>
       </div>
 
-      <p class="scheme-cap">Перепад держим в пределах 70 мм. Выше — растут тени на проекции и приходится усложнять схему засветки.</p>
-    </div>
-
-    <div class="grid g-2" style="align-items:start">
-      <div class="rv">
-        <h3 class="h-m" style="margin-bottom:6px">Материалы и покрытие</h3>
-        <ul class="spec">
-          <li><b>МДФ 6 мм</b> — детализированные верхние слои</li>
-          <li><b>МДФ 8–10 мм</b> — основные слои рельефа</li>
-          <li><b>МДФ / фанера 16–18 мм</b> — основание модулей</li>
-          <li><b>Металлокаркас</b> стола из профильной трубы, декоративная облицовка, ревизионные люки</li>
-          <li><b>Финиш</b> — белый или светло-серый матовый, без бликов, под проекцию</li>
-        </ul>
-      </div>
-      <div class="rv" style="transition-delay:.08s">
-        <h3 class="h-m" style="margin-bottom:6px">Порядок производства</h3>
-        <ul class="spec">
-          <li>Топооснова или 3D-модель от Заказчика → приведение к масштабу</li>
-          <li>Цифровая модель рельефа, разбивка на слои по отметкам</li>
-          <li>ЧПУ-фрезеровка контуров, маркировка, контроль посадочных мест</li>
-          <li>Сборка модулей на направляющих, склейка, подрезка швов</li>
-          <li>Шлифовка, шпаклёвка, грунт, покраска, контроль стыков модулей</li>
-        </ul>
-      </div>
+      <p class="scheme-cap">Перепад держим в пределах 70 мм — выше растут тени на проекции.</p>
     </div>
 
     <div class="grid g-2" style="margin-top:clamp(28px,4vw,52px)">
@@ -718,10 +690,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <section class="sec sec--tight" id="light" style="background:var(--paper-2)">
   <div class="wrap">
     <div class="sec-head">
-      <div class="rv"><div class="eyebrow">04 — Проекция и свет</div></div>
+      <div class="rv"><div class="eyebrow">03 — Проекция и свет</div></div>
       <div class="rv">
         <h2 class="h-xl">Почему два<br>проектора, а не один</h2>
-        <p class="lead" style="margin-top:22px;max-width:60ch">Площадь проекции — 9 м². В помещении со средним освещением одиночный проектор 5500 лм работает на нижней границе читаемости. Схема из двух аппаратов даёт запас по яркости и одновременно решает проблему теней от рельефа.</p>
+        <p class="lead" style="margin-top:22px;max-width:60ch">Площадь проекции 9 м². Один проектор 5500 лм — на грани читаемости при обычном освещении зала. Два аппарата дают запас по яркости и убирают тени от рельефа.</p>
       </div>
     </div>
 
@@ -774,14 +746,14 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
         <text class="onacc" x="0" y="328">Наше решение</text>
       </svg>
 
-      <p class="scheme-cap">Расчёт с учётом потерь на оптику, калибровку, неровную поверхность, коррекцию геометрии и старение источника света.</p>
+      <p class="scheme-cap">Расчёт учитывает потери на оптику, калибровку, геометрию и старение источника.</p>
     </div>
 
     <div class="ql rv" style="margin-top:clamp(28px,4vw,52px)">
-      <div><span class="tag">Оптика</span><div><b>Короткофокусная, коэффициент 0,75–0,95</b><p>Требование прямо следует из высоты помещения: с 2400–2850 мм накрыть поле 3000 мм другой оптикой невозможно. Лазерный источник, режим 24/7, потолочная установка.</p></div></div>
-      <div><span class="tag">Тени</span><div><b>Перекрытие двух каналов</b><p>Проекторы разнесены и светят на одно поле. Зона, затенённая выступом рельефа для первого аппарата, засвечена вторым. Совмещение — варпинг и мягкие маски на этапе ПНР.</p></div></div>
-      <div><span class="tag">Свет в зале</span><div><b>Отдельная группа освещения над макетом</b><p>Прямой направленный свет на поверхность исключаем, яркие светильники над центром стола не размещаем. В режиме показа освещение над макетом снижается до 30–50% от рабочего уровня. Желательно диммирование.</p></div></div>
-      <div><span class="tag">Контент</span><div><b>Крупные цветовые поля вместо мелкого текста</b><p>На рельефе читаются зоны, маршруты, подсветка и анимация. Мелкий текст и подробные пояснения выводим на планшет — там они читаются всегда.</p></div></div>
+      <div><span class="tag">Оптика</span><div><b>Короткофокусная, коэффициент 0,75–0,95</b><p>С высоты 2400–2850 мм только короткий фокус накрывает поле 3000 мм. Лазерный источник, режим 24/7, потолочная установка.</p></div></div>
+      <div><span class="tag">Тени</span><div><b>Перекрытие двух каналов</b><p>Проекторы разнесены, светят на одно поле — тень от рельефа для одного засвечивает второй. Совмещение варпингом и масками на ПНР.</p></div></div>
+      <div><span class="tag">Свет в зале</span><div><b>Отдельная группа освещения над макетом</b><p>Прямой свет на макет и яркие светильники над столом исключены. В режиме показа освещение над макетом — 30–50% от рабочего, нужно диммирование.</p></div></div>
+      <div><span class="tag">Контент</span><div><b>Крупные цветовые поля вместо мелкого текста</b><p>На рельефе — зоны, маршруты, подсветка, анимация. Текст и пояснения — на планшете.</p></div></div>
     </div>
   </div>
 </section>
@@ -790,10 +762,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <section class="sec" id="ctrl">
   <div class="wrap">
     <div class="sec-head">
-      <div class="rv"><div class="eyebrow">05 — Управление</div></div>
+      <div class="rv"><div class="eyebrow">04 — Управление</div></div>
       <div class="rv">
         <h2 class="h-xl">Планшет по локальной<br>сети, без ноутбука</h2>
-        <p class="lead" style="margin-top:22px;max-width:60ch">Медиасервер стоит в объёме стола и запускается сам при подаче питания. Оператор берёт планшет и ведёт показ. Никаких подключений к компьютеру, никакой настройки перед каждой демонстрацией.</p>
+        <p class="lead" style="margin-top:22px;max-width:60ch">Медиасервер в объёме стола, запускается сам при подаче питания. Оператор берёт планшет и ведёт показ — без компьютера и настройки перед каждым разом.</p>
       </div>
     </div>
 
@@ -932,19 +904,25 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <section class="sec" id="smeta">
   <div class="wrap">
     <div class="sec-head">
-      <div class="rv"><div class="eyebrow">06 — Смета</div></div>
+      <div class="rv"><div class="eyebrow">05 — Смета</div></div>
       <div class="rv">
         <h2 class="h-xl">Поставка<br>интерактивного макета</h2>
-        <p class="lead" style="margin-top:22px;max-width:58ch">Смета № 2618 от 29.09.2026. Два варианта комплектации — стандарт и эконом. В каждом четыре блока: оборудование, конструктив, контент, работы. Цены без НДС.</p>
+        <p class="lead" style="margin-top:22px;max-width:58ch">Смета № 2618 от 29.09.2026. Два варианта комплектации — переключите ниже. В каждом четыре блока: оборудование, конструктив, контент, работы. Цены без НДС.</p>
       </div>
     </div>
 
     <div class="rv">
       <div class="sm-tabs" role="tablist">
-        <button type="button" class="sm-tab is-active" data-variant="standard" role="tab" aria-selected="true"><b>Стандарт</b><span>3 766 000 ₽</span></button>
-        <button type="button" class="sm-tab" data-variant="econom" role="tab" aria-selected="false"><b>Эконом</b><span>2 886 000 ₽</span></button>
+        <button type="button" class="sm-tab is-active" data-variant="standard" role="tab" aria-selected="true"><b>Стандарт</b><span>3 766 000 ₽</span><em>Проектор 6–7 тыс лм, полный рельеф МДФ</em></button>
+        <button type="button" class="sm-tab" data-variant="econom" role="tab" aria-selected="false"><b>Эконом</b><span>2 886 000 ₽</span><em>Проектор 5000 лм, облегчённый рельеф</em></button>
       </div>
+      <p class="small" style="margin-top:12px">Отличаются оборудование, конструктив и контент. Монтаж и пусконаладка — одинаковые в обоих вариантах.</p>
+      <button type="button" class="sm-more" id="smMore" aria-expanded="false" aria-controls="smDetails">
+        <span class="txt">Узнать подробнее</span><span class="ar">↓</span>
+      </button>
     </div>
+
+    <div id="smDetails" hidden>
 
     <div class="sm rv sm-set" data-variant="standard">
 
@@ -1073,6 +1051,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="rv">
       <p class="small" style="margin-top:18px;max-width:70ch">Предложение действует 30 календарных дней. Цены на импортное оборудование подтверждаются на дату заказа. Подготовка помещения — электропитание в точках установки, несущие конструкции под кронштейны, отдельная группа освещения над макетом — на стороне Заказчика.</p>
     </div>
+
+    </div>
   </div>
 </section>
 
@@ -1080,33 +1060,33 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <section class="sec dark" id="terms">
   <div class="wrap">
     <div class="sec-head">
-      <div class="rv"><div class="eyebrow">07 — График</div></div>
+      <div class="rv"><div class="eyebrow">06 — График</div></div>
       <div class="rv">
-        <h2 class="h-xl">Десять недель<br>от договора до акта</h2>
-        <p class="lead" style="margin-top:22px;max-width:58ch">Производство конструктива и разработка контента идут параллельно. Критический путь — поставка проекторов, поэтому заказ оборудования уходит сразу после утверждения проектных решений.</p>
+        <h2 class="h-xl">Пять этапов<br>от договора до акта</h2>
+        <p class="lead" style="margin-top:22px;max-width:58ch">Конструктив и контент — параллельно. Критический путь — поставка проекторов, заказ уходит сразу после утверждения проекта.</p>
       </div>
     </div>
 
     <div class="steps rv">
-      <div><div class="st-n">01</div><div><b>Предпроектная подготовка</b><p>Сбор исходных данных, обмер помещения, согласование концепции показа, финальный подбор оборудования.</p></div><div class="st-t">Неделя 1</div></div>
-      <div><div class="st-n">02</div><div><b>Проектирование</b><p>Конструктивные решения, расчёт проекции и точек подвеса, схемы коммутации, рабочая документация. Заказ оборудования.</p></div><div class="st-t">Недели 2–3</div></div>
-      <div><div class="st-n">03</div><div><b>Производство</b><p>Цифровая модель рельефа, ЧПУ-резка и сборка модулей, изготовление стола, покраска. Параллельно — сценарии, отрисовка, анимация, звук, сборка приложения.</p></div><div class="st-t">Недели 3–8</div></div>
-      <div><div class="st-n">04</div><div><b>Поставка и монтаж</b><p>Доставка, занос, сборка стола и модулей, выравнивание поверхности, монтаж кронштейнов и проекторов, прокладка линий, подключение.</p></div><div class="st-t">Неделя 9</div></div>
-      <div><div class="st-n">05</div><div><b>Пусконаладка и сдача</b><p>Настройка проекторов и медиасервера, геометрическая калибровка, варпинг и маскирование под рельеф, привязка контента, тест автозапуска, обучение, документация, акт ПНР.</p></div><div class="st-t">Неделя 10</div></div>
+      <details class="st-d"><summary><span class="st-n">01</span><b>Предпроектная подготовка</b><span class="ic">+</span></summary><p>Сбор исходных данных, обмер помещения, согласование концепции показа, финальный подбор оборудования.</p></details>
+      <details class="st-d"><summary><span class="st-n">02</span><b>Проектирование</b><span class="ic">+</span></summary><p>Конструктивные решения, расчёт проекции и точек подвеса, схемы коммутации, рабочая документация. Заказ оборудования.</p></details>
+      <details class="st-d"><summary><span class="st-n">03</span><b>Производство</b><span class="ic">+</span></summary><p>Цифровая модель рельефа, ЧПУ-резка и сборка модулей, изготовление стола, покраска. Параллельно — сценарии, отрисовка, анимация, звук, сборка приложения.</p></details>
+      <details class="st-d"><summary><span class="st-n">04</span><b>Поставка и монтаж</b><span class="ic">+</span></summary><p>Доставка, занос, сборка стола и модулей, выравнивание поверхности, монтаж кронштейнов и проекторов, прокладка линий, подключение.</p></details>
+      <details class="st-d"><summary><span class="st-n">05</span><b>Пусконаладка и сдача</b><span class="ic">+</span></summary><p>Настройка проекторов и медиасервера, геометрическая калибровка, варпинг и маскирование под рельеф, привязка контента, тест автозапуска, обучение, документация, акт ПНР.</p></details>
     </div>
 
     <div class="sec-head" style="margin:clamp(44px,6vw,80px) 0 clamp(20px,3vw,36px)">
-      <div class="rv"><div class="eyebrow">08 — Для старта</div></div>
+      <div class="rv"><div class="eyebrow">07 — Для старта</div></div>
       <div class="rv"><h3 class="h-l">Что нужно от Заказчика</h3>
       <p class="lead" style="margin-top:16px;max-width:58ch">Первые три пункта блокируют старт производства — без них не запускается цифровая модель рельефа и не фиксируются точки подвеса.</p></div>
     </div>
 
-    <div class="ql rv">
-      <div><span class="tag">01</span><div><b>Исходники территории</b><p>Топооснова, 3D-модель или графические исходники с высотными отметками и границами зон. Без них невозможно собрать цифровую модель рельефа.</p></div></div>
-      <div><span class="tag">02</span><div><b>Доступ к помещению для обмера</b><p>Фактические высота потолка и отметки, тип перекрытия под кронштейны, расположение существующих светильников и розеточных групп.</p></div></div>
-      <div><span class="tag">03</span><div><b>Сценарии показа</b><p>Что именно показываем в основном ролике и в дополнительном сценарии: зоны, объекты, этапы развития, связи. Утверждаем перечень и сценарий до отрисовки.</p></div></div>
-      <div><span class="tag">04</span><div><b>Электропитание и свет</b><p>Питание в точках установки проекторов и в объёме стола. Отдельная группа освещения над макетом, желательно с диммированием.</p></div></div>
-      <div><span class="tag">05</span><div><b>Согласование дат</b><p>Дата подписания договора, окно на согласования по этапам и контрольная дата сдачи. От них считается график.</p></div></div>
+    <div class="faq rv">
+      <details class="faq-d"><summary><span class="tag">01</span><b>Исходники территории</b><span class="ic">+</span></summary><p>Топооснова, 3D-модель или графика с высотными отметками и границами зон — без них не собрать цифровую модель рельефа.</p></details>
+      <details class="faq-d"><summary><span class="tag">02</span><b>Доступ к помещению для обмера</b><span class="ic">+</span></summary><p>Фактическая высота потолка, тип перекрытия под кронштейны, расположение светильников и розеточных групп.</p></details>
+      <details class="faq-d"><summary><span class="tag">03</span><b>Сценарии показа</b><span class="ic">+</span></summary><p>Что показываем в основном ролике и дополнительном сценарии: зоны, объекты, связи. Утверждаем до отрисовки.</p></details>
+      <details class="faq-d"><summary><span class="tag">04</span><b>Электропитание и свет</b><span class="ic">+</span></summary><p>Питание в точках установки проекторов и в объёме стола. Отдельная группа освещения над макетом, желательно с диммированием.</p></details>
+      <details class="faq-d"><summary><span class="tag">05</span><b>Согласование дат</b><span class="ic">+</span></summary><p>Дата подписания, окно на согласования по этапам, контрольная дата сдачи — от них считается график.</p></details>
     </div>
 
     <div class="rule" style="margin:clamp(40px,5.4vw,72px) 0 24px"></div>
@@ -1225,6 +1205,17 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       smSets.forEach(function(s){ s.hidden = s.getAttribute('data-variant')!==v; });
     });
   });
+
+  var smMore=document.getElementById('smMore'), smDetails=document.getElementById('smDetails');
+  if(smMore){
+    smMore.addEventListener('click', function(){
+      var willOpen=smDetails.hidden;
+      smDetails.hidden=!willOpen;
+      smMore.setAttribute('aria-expanded', willOpen?'true':'false');
+      smMore.querySelector('.txt').textContent = willOpen ? 'Скрыть подробности' : 'Узнать подробнее';
+      if(willOpen) smDetails.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  }
 })();
 </script>
 </body>
